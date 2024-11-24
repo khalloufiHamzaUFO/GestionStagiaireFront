@@ -1,0 +1,39 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="wrapper fadeInDown">
+
+<h2 class="insc">formulaire d'inscription</h2>
+<form #loginform="ngForm" (ngSubmit)="onSubmit(loginform)">
+  <div class="form-group">
+    <input type="email"  placeholder="Email" class="form-group fadeIn second" name="email" ngModel #email="ngModel" required UniqueEmail>
+    <div class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+      <div *ngIf="email.errors['required']">Email is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="text" placeholder="Nom & prenom" class="form-group fadeIn second" name="nomprenom" ngModel #nomprenom="ngModel" required>
+    <div class="text-danger" *ngIf="nomprenom.invalid && (nomprenom.dirty || nomprenom.touched)">
+      nom & prenom is required
+    </div>
+  </div>
+  <div class="form-group">
+  
+    <input type="password" placeholder="Mot de passe" class="form-group fadeIn second" name="motdepasse" ngModel #motdepasse="ngModel" required>
+    <div class="text-danger" *ngIf="motdepasse.invalid && (motdepasse.dirty || motdepasse.touched)">
+      Password is required
+    </div>
+  </div>
+  <div class="form-group fadeIn second">
+   <label >Role:</label>
+    <div class="input-group" placeholder="Role">  
+      <input list="roles" id="role" name="role" class="form-control fadeIn second" ngModel #role="ngModel">
+        <datalist id="roles">
+          <option value="Admin">
+          <option value="SuperAdmin">
+        </datalist>
+    </div>
+    <button type="submit" class="btn btn-primary">S'inscrire</button>
+  </div>
+</form>
+</div>

@@ -1,0 +1,484 @@
+erfwsefsdfsdfsdfs<style>
+
+</style>
+
+<div class="container">
+    <div class="border">
+        <button  class="btn btn-md btn-outline-primary" (click)="open(content)">
+          <i class="fa fa-user"></i>Nouveau Candidat</button>
+          <h4><i class="fa fa-search" style="margin-left:410px;"></i>Liste des candidats</h4>
+      </div>
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom & Prenom</th>
+        <th>Email</th>
+        <th>Tel</th>
+        <th>Date de prise en contact</th>
+        <th>Exp</th>
+        <th>Statut</th>
+        <th>Actions</th>
+    </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let candidat of candidats">
+        <td><span>{{candidat.id}}</span></td>
+        <td><span>{{candidat.nomPrenom}}</span></td>
+        <td><span>{{candidat.email}}</span></td>
+        <td><span>{{candidat.tel}}</span></td>
+        <td><span>{{candidat.date}}</span></td>
+        <td><span>{{candidat.exp}}</span></td>
+        <td><span>{{candidat.statut}}</span></td>
+        <td>
+            <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails,candidat)">
+              <i class="fa fa-search"></i>Details</button>
+            <button class="btn btn-sm btn-warning" (click)="openEdit(contentEdit, candidat)">
+              <i class="fa fa-edit"></i>Modifier</button>
+            <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete, candidat)"
+            >
+              <i class="fa fa-remove"></i>Supprimer</button>
+          </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Nouveau Candidat </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">   
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="form-group">
+          <label style="margin-top:10px ;margin-bottom:7px  ;">Nom & prenom:</label>
+          <div class="input-group">
+            <input id="nomPrenom" name="nomPrenom" class="form-control" ngModel required>
+          </div>
+        </div>
+        <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Email:</label>
+            <div class="input-group">
+              <input required #email="ngModel" type="email" id="email" name="email" class="form-control" ngModel>
+              <span *ngIf="email.invalid && email.touched" class="error">Email is required</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Tel:</label>
+            <div class="input-group">
+              <input id="tel" name="tel" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Date de prise en contact:</label>
+            <div class="input-group">
+              <!-- <input id="date" name="date" class="form-control" ngModel required> -->
+              <input type="date" id="date" name="date"  class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Experience:</label>
+            <div class="input-group">
+              <input id="exp" name="exp" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Qualite:</label>
+            <div class="input-group">
+              <!-- <input id="qualite" name="qualite" class="form-control" ngModel required> -->
+              <div class="input-group">  
+                <input list="Qualite"  id="qualite" name="qualite" class="form-control" ngModel   >
+                  <datalist id="Qualite">
+                    <option value="Non précisé">
+                    <option value="Conforme">
+                    <option value="Pas conforme">
+                  </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Employeur actuelle:</label>
+            <div class="input-group">
+              <input id="employeur" name="employeur" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Salaire:</label>
+            <div class="input-group">
+              <input id="salaire" name="salaire" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">motivation:</label>
+            <div class="input-group">
+              <input id="motivation" name="motivation" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Disponniblite:</label>
+            <div class="input-group">
+              <!-- <input id="disponniblite" name="disponniblite" class="form-control" ngModel required> -->
+              <div class="input-group">
+              
+                <input list="Disponniblite" id="disponniblite" name="disponniblite" class="form-control" ngModel  >
+                  <datalist id="Disponniblite">
+                    <option value="Non précisé">
+                    <option value="Non">
+                    <option value="Oui">
+                  </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Mobilite:</label>
+            <div class="input-group">
+              
+              <input list="Mobilite" id="mobilite" name="mobilite" class="form-control" ngModel >
+                <datalist id="Mobilite">
+                  <option value="Non précisé">
+                  <option value="Non">
+                  <option value="Oui">
+                </datalist>
+            </div>
+            <!-- <input id="mobilite" name="mobilite" class="form-control" ngModel required> -->
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Eligibilite:</label>
+            <div class="input-group">
+              <input id="eligibilite" name="eligibilite" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Score:</label>
+            <div class="input-group">
+              <input id="score" name="score" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Duree:</label>
+            <div class="input-group">
+              <input id="duree" name="duree" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Commentaire:</label>
+            <div class="input-group">
+              <input id="commentaire" name="commentaire" class="form-control" ngModel required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Statut:</label>
+            <div class="input-group">
+              <!-- <input id="statut" name="statut" class="form-control" ngModel required> -->
+              <div class="input-group">  
+                <input list="Statut"   id="statut" name="statut" class="form-control" ngModel    >
+                  <datalist id="Statut">
+                    <option value="Candidature valide">
+                    <option value="Candidature refusée">
+                    <option value="Qualifié">
+                    <option value="Non Qualifié">
+                    <option value="Candidat retenu">
+                    <option value="Candidat non retenu">  
+                  </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="border text-center">
+            <button data-dismiss="modal" class="btn btn-info">Submit</button>
+          </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Annuler</button>
+    </div>
+  </ng-template>
+
+  <ng-template #contentDetails let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Détails du candidat:</h4>
+      <button type="button" class="close" aria-label="Close" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <div class="form-group">
+          <label style="margin-top:10px ;margin-bottom:7px  ;">Nom & prenom:</label>
+          <div class="input-group">
+            <input id="nPrenom" class="form-control" readOnly >
+          </div>
+        </div>
+        <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Email:</label>
+            <div class="input-group">
+              <input id="mail"  class="form-control" readOnly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Tel:</label>
+            <div class="input-group">
+              <input id="teleph"  class="form-control" readOnly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Date de prise en contact:</label>
+            <div class="input-group">
+              <input id="datePr" class="form-control" readOnly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Experience:</label>
+            <div class="input-group">
+              <input id="exper"  class="form-control" readOnly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Qualite:</label>
+            <div class="input-group">
+              <input id="qualitedt"  class="form-control" readOnly>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Employeur Actuelle:</label>
+            <div class="input-group">
+              <input id="employeurdt" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Salaire:</label>
+            <div class="input-group">
+              <input id="salairedt" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Sa motivation:</label>
+            <div class="input-group">
+              <input id="motivationdt" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Disponniblite:</label>
+            <div class="input-group">
+              <input id="disponniblite" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Mobilite:</label>
+            <div class="input-group">
+              <input id="mobilite" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Eligibilite:</label>
+            <div class="input-group">
+              <input id="eligibilite" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Score:</label>
+            <div class="input-group">
+              <input id="score" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Duree:</label>
+            <div class="input-group">
+              <input id="duree" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Commentaire:</label>
+            <div class="input-group">
+              <input id="commentaire" class="form-control" readOnly >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">statut:</label>
+            <div class="input-group">
+              <input id="statutt" class="form-control" readOnly >
+            </div>
+          </div>
+          
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Quitter</button>
+    </div>
+  </ng-template>
+<!--                                            EDIT                                           -->
+  <ng-template #contentEdit let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Modifier un candidat:</h4>
+      <button type="button" class="close" aria-label="Close" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editForm" novalidate>
+        <div class="form-group">
+          <label style="margin-top:10px ;margin-bottom:7px  ;">Nom & prenom:</label>
+          <div class="input-group">
+            <input formControlName="nomPrenom" class="form-control"  >
+          </div>
+        </div>
+        <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Email:</label>
+            <div class="input-group">
+              <input formControlName="email" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Tel:</label>
+            <div class="input-group">
+              <input formControlName="tel" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px  ;">Date de prise en contact:</label>
+            <div class="input-group">
+              <!-- <input formControlName="date" class="form-control" > -->
+              <input type="date" formControlName="date" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Experience:</label>
+            <div class="input-group">
+              <input formControlName="exp" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Qualite:</label>
+            <div class="input-group">
+              <!-- <input formControlName="qualite" class="form-control" > -->
+              <div class="input-group">  
+                <input list="Qualite"   formControlName="qualite" class="form-control">
+                  <datalist id="Qualite">
+                    <option value="Non précisé">
+                    <option value="Conforme">
+                    <option value="Pas conforme">
+                  </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Employeur Actuelle:</label>
+            <div class="input-group">
+              <input formControlName="employeur" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Salaire:</label>
+            <div class="input-group">
+              <input formControlName="salaire" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Sa motivation:</label>
+            <div class="input-group">
+              <input formControlName="motivation" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Disponniblite:</label>
+            <div class="input-group">
+              <!-- <input formControlName="disponniblite" class="form-control" > -->
+              <div class="input-group">
+              
+                <input list="Disponniblite" formControlName="disponniblite" class="form-control"  >
+                  <datalist id="Disponniblite">
+                    <option value="Non précisé">
+                    <option value="Non">
+                    <option value="Oui">
+                  </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Mobilite:</label>
+            <div class="input-group">
+              <!-- <input formControlName="mobilite" class="form-control" > -->
+              <div class="input-group">
+              
+                <input list="Mobilite" formControlName="mobilite" class="form-control" >
+                  <datalist id="Mobilite">
+                    <option value="Non précisé">
+                    <option value="Non">
+                    <option value="Oui">
+                  </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Eligibilite:</label>
+            <div class="input-group">
+              <input formControlName="eligibilite" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Score:</label>
+            <div class="input-group">
+              <input formControlName="score" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Duree:</label>
+            <div class="input-group">
+              <input formControlName="duree" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Commentaire:</label>
+            <div class="input-group">
+              <input formControlName="commentaire" class="form-control" >
+            </div>
+          </div>
+          <div class="form-group">
+            <label style="margin-top:10px ;margin-bottom:7px ;">Statut:</label>
+            <div  class="input-group">
+              <!-- <input  formControlName="statut"  class="form-control" > -->
+              <div class="input-group">  
+                <input list="Statut"  formControlName="statut"  class="form-control"  >
+                  <datalist id="Statut">
+                    <option value="Candidature valide">
+                    <option value="Candidature refusée">
+                    <option value="Qualifié">
+                    <option value="Non Qualifié">
+                    <option value="Candidat retenu">
+                    <option value="Candidat non retenu">  
+                  </datalist>
+              </div>
+            </div>
+          </div>
+          <div class="border text-center"> <button data-dismiss="modal" class="btn btn-info" (click)="onSave()">Enregistrer</button> </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Quitter</button>
+    </div>
+  </ng-template>
+
+
+<!--                                                 DELETE                                                       -->
+
+  <ng-template #contentDelete let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">confirmer la suppression</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h2>Voulez-vous vraiment supprimer cet enregistrement ?</h2>
+      <div class="border text-center"> 
+        <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Oui Supprimer</button> 
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Annuler</button>
+    </div>
+  </ng-template>
+
+
+
